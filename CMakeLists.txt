@@ -90,9 +90,10 @@ INCLUDE_DIRECTORIES (
     ${WEBKIT2GTK_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIRS}
     ./pcnano/include
-    ~/git/nanogui/ext/eigen
-    ~/git/nanogui/ext/glfw/include
-    ~/git/nanogui/ext/nanovg/src
+    ./ext/eigen/Eigen
+    ./ext/eigen
+    ./ext/glfw/include
+    ./ext/nanovg/src
     
     )
  
