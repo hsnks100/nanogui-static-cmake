@@ -50,7 +50,7 @@
 #  pragma warning(disable: 4457 4456 4005 4312)
 #endif
 
-#define STB_IMAGE_IMPLEMENTATION
+//#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 #if defined(_WIN32)
@@ -144,14 +144,17 @@ public:
     ExampleApplication() : nanogui::Screen(Eigen::Vector2i(1024, 768), "NanoGUI Test") {
         using namespace nanogui;
 
+        printf("%d...\n", __LINE__);
         Window *window = new Window(this, "Button demo");
         window->setPosition(Vector2i(15, 15));
         window->setLayout(new GroupLayout());
 
+        printf("%d...\n", __LINE__);
         /* No need to store a pointer, the data structure will be automatically
            freed when the parent window is deleted */
         new Label(window, "Push buttons", "sans-bold");
 
+        printf("%d...\n", __LINE__);
         Button *b = new Button(window, "Plain button");
         b->setCallback([] { cout << "pushed!" << endl; });
         b->setTooltip("short tooltip");
@@ -233,6 +236,7 @@ public:
         #else
             string resourcesFolderPath("./");
         #endif
+        printf("%d...\n", __LINE__);
 
         new Label(window, "Image panel & scroll panel", "sans-bold");
         PopupButton *imagePanelBtn = new PopupButton(window, "Image Panel");
@@ -243,6 +247,7 @@ public:
         imgPanel->setImages(icons);
         popup->setFixedSize(Vector2i(245, 150));
 
+        printf("%d...\n", __LINE__);
         auto imageWindow = new Window(this, "Selected image");
         imageWindow->setPosition(Vector2i(710, 15));
         imageWindow->setLayout(new GroupLayout());
@@ -401,8 +406,10 @@ public:
         panel->setLayout(new BoxLayout(Orientation::Horizontal,
                                        Alignment::Middle, 0, 6));
 
+        printf("%d...\n", __LINE__);
         auto ib = panel->add<IntBox<int>>();
         ib->setEditable(true);
+        printf("%d...\n", __LINE__);
 
         b = panel->add<Button>("", ENTYPO_ICON_FORWARD);
         b->setFixedSize(Vector2i(22, 22));
@@ -415,6 +422,7 @@ public:
             }
         });
 
+        printf("%d...\n", __LINE__);
         window = new Window(this, "Grid of small widgets");
         window->setPosition(Vector2i(425, 300));
         GridLayout *layout =
@@ -524,6 +532,7 @@ public:
            buffer object management.
         */
 
+        printf("%d...\n", __LINE__);
         mShader.init(
             /* An identifying name */
             "a_simple_shader",
@@ -555,10 +564,12 @@ public:
         positions.col(2) <<  1,  1, 0;
         positions.col(3) << -1,  1, 0;
 
+        printf("%d...\n", __LINE__);
         mShader.bind();
         mShader.uploadIndices(indices);
         mShader.uploadAttrib("position", positions);
         mShader.setUniform("intensity", 0.5f);
+        printf("%d...\n", __LINE__);
     }
 
     ~ExampleApplication() {
@@ -613,10 +624,14 @@ int main(int /* argc */, char ** /* argv */) {
     try {
         nanogui::init();
 
+        printf("!!!\n");
         /* scoped variables */ {
             nanogui::ref<ExampleApplication> app = new ExampleApplication();
+            printf("!!!\n");
             app->drawAll();
+            printf("!!!\n");
             app->setVisible(true);
+            printf("!!!\n");
             nanogui::mainloop();
         }
 

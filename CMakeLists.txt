@@ -16,6 +16,36 @@ SET ( OUTPUT_ELF
         "${CMAKE_PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.out"
         )
 SET ( SRC_FILES 
+    nanogui/src/button.cpp
+    nanogui/src/checkbox.cpp
+    nanogui/src/colorpicker.cpp
+    nanogui/src/colorwheel.cpp
+    nanogui/src/combobox.cpp
+    nanogui/src/common.cpp
+    nanogui/src/glcanvas.cpp
+    nanogui/src/glutil.cpp
+    nanogui/src/graph.cpp
+    nanogui/src/imagepanel.cpp
+    nanogui/src/imageview.cpp
+    nanogui/src/label.cpp
+    nanogui/src/layout.cpp
+    nanogui/src/messagedialog.cpp
+    nanogui/src/popupbutton.cpp
+    nanogui/src/popup.cpp
+    nanogui/src/progressbar.cpp
+    nanogui/src/screen.cpp
+    nanogui/src/serializer.cpp
+    nanogui/src/slider.cpp
+    nanogui/src/stackedwidget.cpp
+    nanogui/src/tabheader.cpp
+    nanogui/src/tabwidget.cpp
+    nanogui/src/textbox.cpp
+    nanogui/src/theme.cpp
+    nanogui/src/vscrollpanel.cpp
+    nanogui/src/widget.cpp
+    nanogui/src/window.cpp
+    nanogui/build/nanogui_resources.cpp
+    nanogui/ext/nanovg/src/nanovg.c
     main.cpp
 
     )
@@ -60,7 +90,7 @@ pkg_check_modules(XINERAMA xinerama)
 
  
 # 공통 링크 라이브러리 (-l)
-LINK_LIBRARIES( -Wl,-Bstatic nanogui -Wl,-Bdynamic pthread dl
+LINK_LIBRARIES( -Wl,-Bstatic -Wl,-Bdynamic pthread dl glfw
     ) 
  
 # 공통 링크 라이브러리 디렉토리 (-L)
@@ -74,7 +104,8 @@ LINK_DIRECTORIES (
     ${XINERAMA_LIBRARY_DIRS}
     ${WEBKIT2GTK_LIBRARY_DIRS}
     ${OPENGL_LIBRARY_DIRS}
-    ./pcnano/lib
+    #./pcnano/lib
+    #/cross/pcnano/lib
     )
 #TARGET_LINK_LIBRARIES(${OUTPUT_ELF} Bdynamic pthread )
 
@@ -89,11 +120,14 @@ INCLUDE_DIRECTORIES (
     ${XINERAMA_INCLUDE_DIRS}
     ${WEBKIT2GTK_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIRS}
-    ./pcnano/include
-    ./ext/eigen/Eigen
-    ./ext/eigen
-    ./ext/glfw/include
-    ./ext/nanovg/src
+    #/cross/pcnano/include
+    #./pcnano/include
+    nanogui/include/
+    nanogui/ext/eigen/Eigen
+    nanogui/ext/eigen
+    nanogui/ext/glfw/include
+    nanogui/ext/nanovg/src
+    
     
     )
  
@@ -130,8 +164,8 @@ TARGET_LINK_LIBRARIES(${OUTPUT_ELF}
     )
 
 
-ADD_CUSTOM_COMMAND (
-    TARGET ${OUTPUT_ELF}
-    POST_BUILD
-    COMMAND ${CMAKE_STRIP} Release/${OUTPUT_ELF}
-    )
+    #COMMAND ${CMAKE_STRIP} Release/${OUTPUT_ELF}
+#ADD_CUSTOM_COMMAND (
+    #TARGET ${OUTPUT_ELF}
+    #POST_BUILD
+    #)
