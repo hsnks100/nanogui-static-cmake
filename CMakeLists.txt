@@ -44,7 +44,7 @@ SET ( SRC_FILES
     nanogui/src/vscrollpanel.cpp
     nanogui/src/widget.cpp
     nanogui/src/window.cpp
-    nanogui/build/nanogui_resources.cpp
+    nanogui_resources.cpp
     nanogui/ext/nanovg/src/nanovg.c
     main.cpp
 
